@@ -56,7 +56,6 @@ plugins:
 
 author:
   name   : "Diego López Municio"
-  avatar : "/assets/images/bio-photo.jpg"
   bio    : "Ingeniería Robótica Software en la Universidad Rey Juan Carlos"
   links:
     - label: "GitHub"
@@ -81,7 +80,7 @@ defaults:
       comments: true
       share: true
       related: true
-      
+
 category_archive:
   type: liquid
   path: /categories/
