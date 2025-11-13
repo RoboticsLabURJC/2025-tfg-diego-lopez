@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>go2_description</name>
+  <version>1.0.0</version>
+  <description>
+    URDF Description package for go2_description.
+    This package contains configuration data, 3D models, and launch files for the robot.
+  </description>
+
+  <maintainer email="TODO@email.com">TODO</maintainer>
+  <license>BSD-3-Clause</license>
+
+  <!-- Build tool -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Dependencies -->
+  <depend>robot_state_publisher</depend>
+  <depend>xacro</depend>
+  <depend>rviz2</depend>
+  <depend>joint_state_publisher_gui</depend>
+  <depend>gazebo_ros</depend>
+
+  <!-- Export (architecture independent) -->
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
