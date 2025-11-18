@@ -51,4 +51,13 @@ def generate_launch_description():
             arguments=['-file', tmp_urdf, '-name', 'go2_description', '-world', 'empty', '-z', '1'],
             output='screen'
         ),
+        Node(
+            package='ros_gz_bridge',
+            executable='parameter_bridge',
+            name='joint_state_bridge',
+            arguments=[
+                '/model/go2_description/joint_state@sensor_msgs/msg/JointState@gz.msgs.Model'
+            ],
+            output='screen'
+        )
     ])

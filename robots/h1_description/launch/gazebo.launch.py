@@ -47,7 +47,17 @@ def generate_launch_description():
             package='ros_gz_sim',
             executable='create',
             name='spawn_go2',
-            arguments=['-file', tmp_urdf, '-name', 'go2_description', '-world', 'empty', '-z', '2'],
+            arguments=['-file', tmp_urdf, '-name', 'h1_description', '-world', 'empty', '-z', '2'],
             output='screen'
         ),
+
+        Node(
+            package='ros_gz_bridge',
+            executable='parameter_bridge',
+            name='joint_state_bridge',
+            arguments=[
+                '/model/h1_description/joint_state@sensor_msgs/msg/JointState@gz.msgs.Model'
+            ],
+            output='screen'
+        )
     ])
