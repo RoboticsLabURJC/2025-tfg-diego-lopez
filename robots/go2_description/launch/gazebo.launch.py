@@ -11,19 +11,11 @@ def generate_launch_description():
         os.environ.get("GZ_SIM_RESOURCE_PATH", "") + ":" + pkg_share
     )
 
-    urdf_file = os.path.join(pkg_share, 'urdf', 'go2_description.urdf')
+    xacro_file = os.path.join(pkg_share, 'xacro', 'robot.xacro')
+    tmp_urdf = '/tmp/go2_from_xacro.urdf'
 
-    with open(urdf_file, 'r') as f:
-        urdf_content = f.read()
-
-    urdf_fixed = urdf_content.replace(
-        'package://go2_description/dae',
-        os.path.join(pkg_share, 'meshes')
-    )
-
-    tmp_urdf = '/tmp/go2_fixed.urdf'
-    with open(tmp_urdf, 'w') as f:
-        f.write(urdf_fixed)
+    # Convertir XACRO → URDF
+    os.system(f"xacro {xacro_file} > {tmp_urdf}")
 
     gui = os.environ.get("DISPLAY") is not None
     gazebo_cmd = ['gz', 'sim', '-r', 'empty.sdf']
