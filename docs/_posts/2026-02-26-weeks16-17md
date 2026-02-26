@@ -1,0 +1,31 @@
+---
+layout: single
+title: "Weeks 16–17 – MuJoCo"
+date: 2026-02-26
+excerpt: "Weeks 16 and 17 of the project: learning to use MuJoCo"
+categories: blog
+---
+
+During these two weeks, I focused on learning how to use MuJoCo for simulation.
+
+First, I worked through the official Python examples provided by MuJoCo in order to verify that my installation was working correctly and to understand the basic workflow. I reused parts of the example code to run small tests. You can find these initial experiments here:  
+[Initial MuJoCo tests](../../../pruebas/inicio_mujoco.ipynb)
+
+After becoming familiar with the basics, I started working with the G1 robot model in MuJoCo. My first attempt was to load the model directly from the repository stored on my computer. However, the model did not include a floor element, so the robot continuously fell during the simulation.
+
+To solve this, I copied the model into the 'pruebas' directory so that I could modify the XML file and add a floor to the environment. Although the simulation initially looked correct, I noticed that the model did not expose any joints when inspected.
+
+After investigating the issue, I discovered that the joint definitions were located in a separate file. I therefore copied the corresponding file as well and integrated it into the model. Using mjlab, I was able to properly load the joints, create the control interface, and begin interacting with them.
+
+You can find the experiments with the G1 robot here:  
+[G1 tests](../../../pruebas/G1/incluir_robots.ipynb)
+
+---
+
+### Summary
+
+- Tested and explored MuJoCo using official Python examples.
+- Integrated the G1 robot model into a custom simulation environment.
+- Added missing environment elements (floor) to ensure physical stability.
+- Located and incorporated external joint definitions.
+- Successfully loaded and controlled the robot joints.
