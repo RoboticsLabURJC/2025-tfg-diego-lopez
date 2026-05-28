@@ -2,6 +2,7 @@
 #define G1_LOCOMOTION__INFERENCE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
+
 #include "geometry_msgs/msg/twist.hpp"
 #include "sensor_msgs/msg/imu.hpp"
 #include "sensor_msgs/msg/joint_state.hpp"
@@ -12,6 +13,7 @@
 #include <string>
 
 #include <onnxruntime_cxx_api.h>
+
 
 namespace g1_locomotion
 {
@@ -29,13 +31,13 @@ private:
 
     void inference_cycle();
 
-    std::array<float, 3> imu_lin_;
-    std::array<float, 3> imu_ang_;
-    std::array<float, 3> gravity_;
-    std::array<float, 29> pos_;
-    std::array<float, 29> vel_;
-    std::array<float, 29> previous_inference_;
-    std::array<float, 3> cmd_vel_;
+    std::array<float, 3> imu_lin_{};
+    std::array<float, 3> imu_ang_{};
+    std::array<float, 3> gravity_{};
+    std::array<float, 29> pos_{};
+    std::array<float, 29> vel_{};
+    std::array<float, 29> previous_inference_{};
+    std::array<float, 3> cmd_vel_{};
 
     rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr twist_sub_;
     rclcpp::Subscription<sensor_msgs::msg::Imu>::SharedPtr imu_sub_;
@@ -180,6 +182,5 @@ private:
 };
 
 } // namespace g1_locomotion
-
 
 #endif //G1_LOCOMOTION__INFERENCE_HPP_
