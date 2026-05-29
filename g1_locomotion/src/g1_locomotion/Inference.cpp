@@ -48,6 +48,8 @@ Inference::Inference() : Node("inference")
         env_,
         model_path.c_str(),
         session_options_);
+
+    RCLCPP_INFO(this->get_logger(), "Node initialized successfully");
 }
 
 void
