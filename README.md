@@ -67,8 +67,6 @@ ros2 launch g1_sim launch_g1_sim.launch.py
 ```
 This command starts the Gazebo simulation environment.
 
-Is important to start the inference firstly as it will avoid the robot falling before the net can start controlling it.
-
 **!IMPORTANT**
 
 Make sure to start the inference node **before** launching the simulation.
