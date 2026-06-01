@@ -51,7 +51,9 @@ install(DIRECTORY include/
   DESTINATION include/
 )
 
-install(DIRECTORY policies
+install(DIRECTORY 
+  policies
+  launch
   DESTINATION share/${PROJECT_NAME}
 )
 ament_export_include_directories(include)
