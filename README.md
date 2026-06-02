@@ -53,22 +53,25 @@ The repository is now ready to use.
 
 ## Usage
 
-Once the repository has been installed and the workspace has been sourced, start the locomotion inference node with:
+Once the repository has been installed and the workspace has been sourced, the complete locomotion stack can be used with:
+
+```bash
+ros2 launch g1_locomotion g1_locomotion.launch.py
+```
+
+If needed, the locomotion inference node can be started with:
 
 ```bash
 ros2 run g1_locomotion g1_locomotion_main
 ```
 
-This command starts the neural network inference used to control the robot.
-
-After that, launch the simulation:
+and the simulation using:
 ```bash
 ros2 launch g1_sim launch_g1_sim.launch.py
 ```
-This command starts the Gazebo simulation environment.
 
 **!IMPORTANT**
 
-Make sure to start the inference node **before** launching the simulation.
+When not using the `g1_locomotion` launcher, make sure to start the inference node **before** launching the simulation.
 
-Otherwise, the robot may fall before the controller begins sending commands.
+Otherwise, the controller may not send commands in time, causing the robot to fall during startup.

@@ -15,7 +15,7 @@ def generate_launch_description():
         sim_path = get_package_share_directory('g1_sim')
     except PackageNotFoundError:
         return LaunchDescription([
-            LogInfo(msg="[ERROR] g1_sim package not found.\n\nThis package is required for running the simulation.\n\nYou can install it from:\nhttps://github.com/RoboticsLabURJC/2025-tfg-diego-lopez\n\nOr run the controller without simulation:\nros2 run g1_locomotion g1_locomotion_main"),
+            LogInfo(msg="\n\n[ERROR] g1_sim package not found.\n\nThis package is required for running the simulation.\n\nYou can install it from:\nhttps://github.com/RoboticsLabURJC/2025-tfg-diego-lopez\n\nOr run the controller without simulation:\nros2 run g1_locomotion g1_locomotion_main"),
             EmitEvent(event=Shutdown())
         ])
 
