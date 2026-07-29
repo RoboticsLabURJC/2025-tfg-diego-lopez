@@ -24,6 +24,8 @@ public:
     Inference();
 
 private:
+    std::string model = "/policies/walk_free_elbows.onnx";
+
     void twist_callback(const geometry_msgs::msg::Twist::ConstSharedPtr twist);
     void imu_callback(const sensor_msgs::msg::Imu::ConstSharedPtr imu);
     void joint_state_callback(const sensor_msgs::msg::JointState::ConstSharedPtr joint_state);
@@ -36,7 +38,7 @@ private:
     std::array<float, 3> gravity_{};
     std::array<float, 29> pos_{};
     std::array<float, 29> vel_{};
-    std::array<float, 29> previous_inference_{};
+    std::vector<float> previous_inference_{};
     std::array<float, 3> cmd_vel_{};
 
     rclcpp::Subscription<geometry_msgs::msg::Twist>::SharedPtr twist_sub_;
@@ -99,14 +101,12 @@ private:
         {"left_shoulder_pitch_joint", 0.43857732},
         {"left_shoulder_roll_joint", 0.43857732},
         {"left_shoulder_yaw_joint", 0.43857732},
-        {"left_elbow_joint", 0.43857732},
         {"left_wrist_roll_joint", 0.43857732},
         {"left_wrist_pitch_joint", 0.07450087},
         {"left_wrist_yaw_joint", 0.07450087},
         {"right_shoulder_pitch_joint", 0.43857732},
         {"right_shoulder_roll_joint", 0.43857732},
         {"right_shoulder_yaw_joint", 0.43857732},
-        {"right_elbow_joint", 0.43857732},
         {"right_wrist_roll_joint", 0.43857732},
         {"right_wrist_pitch_joint", 0.07450087},
         {"right_wrist_yaw_joint", 0.07450087}
@@ -144,7 +144,7 @@ private:
         {"right_wrist_yaw_joint", 28}
     };
 
-    std::vector<std::string> order_ = {
+    std::vector<std::string> all_joints_ = {
         "left_hip_pitch_joint",
         "left_hip_roll_joint",
         "left_hip_yaw_joint",
@@ -171,6 +171,36 @@ private:
         "right_shoulder_roll_joint",
         "right_shoulder_yaw_joint",
         "right_elbow_joint",
+        "right_wrist_roll_joint",
+        "right_wrist_pitch_joint",
+        "right_wrist_yaw_joint",
+    };
+
+    std::vector<std::string> policy_joints_ = {
+        "left_hip_pitch_joint",
+        "left_hip_roll_joint",
+        "left_hip_yaw_joint",
+        "left_knee_joint",
+        "left_ankle_pitch_joint",
+        "left_ankle_roll_joint",
+        "right_hip_pitch_joint",
+        "right_hip_roll_joint",
+        "right_hip_yaw_joint",
+        "right_knee_joint",
+        "right_ankle_pitch_joint",
+        "right_ankle_roll_joint",
+        "waist_yaw_joint",
+        "waist_roll_joint",
+        "waist_pitch_joint",
+        "left_shoulder_pitch_joint",
+        "left_shoulder_roll_joint",
+        "left_shoulder_yaw_joint",
+        "left_wrist_roll_joint",
+        "left_wrist_pitch_joint",
+        "left_wrist_yaw_joint",
+        "right_shoulder_pitch_joint",
+        "right_shoulder_roll_joint",
+        "right_shoulder_yaw_joint",
         "right_wrist_roll_joint",
         "right_wrist_pitch_joint",
         "right_wrist_yaw_joint",

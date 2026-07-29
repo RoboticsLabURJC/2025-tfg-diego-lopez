@@ -14,6 +14,8 @@ using std::placeholders::_1;
 
 Inference::Inference() : Node("inference")
 {
+    previous_inference_.assign(policy_joints_.size(),0.f);
+
     twist_sub_ = create_subscription<geometry_msgs::msg::Twist>(
         "/cmd_vel", 10, std::bind(&Inference::twist_callback, this, _1));
     
@@ -28,8 +30,8 @@ Inference::Inference() : Node("inference")
     
     timer_ = create_wall_timer(20ms, std::bind(&Inference::inference_cycle, this));
 
-    for (int i = 0; i < 29; i++) {
-        std::string topic = "/g1/cmd_pos/" + order_[i];
+    for (size_t i = 0; i < policy_joints_.size(); i++) {
+        std::string topic = "/g1/cmd_pos/" + policy_joints_[i];
         joint_publishers_[i] = create_publisher<std_msgs::msg::Float64> (
             topic, 10);
     }
@@ -42,7 +44,7 @@ Inference::Inference() : Node("inference")
         ament_index_cpp::get_package_share_directory("g1_locomotion");
 
     std::string model_path =
-        package_path + "/policies/walk.onnx";
+        package_path + model;
     
     session_ = std::make_unique<Ort::Session>(
         env_,
@@ -96,7 +98,7 @@ Inference::odometry_callback(const nav_msgs::msg::Odometry::ConstSharedPtr odome
 void
 Inference::joint_state_callback(const sensor_msgs::msg::JointState::ConstSharedPtr joint_state)
 {
-    for(int i = 0; i < 29; i++){
+    for(size_t i = 0; i < all_joints_.size(); i++){
         pos_[joint_order_[joint_state->name[i]]] = joint_state->position[i] - default_pos_[joint_state->name[i]];
         vel_[joint_order_[joint_state->name[i]]] = joint_state->velocity[i];
     }
@@ -115,7 +117,7 @@ Inference::inference_cycle()
     obs.insert(obs.end(), previous_inference_.begin(), previous_inference_.end());
     obs.insert(obs.end(), cmd_vel_.begin(), cmd_vel_.end());
 
-    std::array<int64_t, 2> input_shape{1, 99};
+    std::array<int64_t, 2> input_shape{1, static_cast<int64_t>(obs.size())};
 
     Ort::MemoryInfo memory_info = Ort::MemoryInfo::CreateCpu(
         OrtArenaAllocator,
@@ -141,14 +143,14 @@ Inference::inference_cycle()
     
     float* raw_action = output_tensors[0].GetTensorMutableData<float>();
 
-    float action[29];
-    for (int i = 0; i < 29; i++) {
-        action[i] = default_pos_[order_[i]] + raw_action[i] * action_scale_[order_[i]];
+    std::vector<float> action(policy_joints_.size());
+    for (size_t i = 0; i < policy_joints_.size(); i++) {
+        action[i] = default_pos_[policy_joints_[i]] + raw_action[i] * action_scale_[policy_joints_[i]];
     }
 
-    std::copy(raw_action, raw_action + 29, previous_inference_.begin());
+    std::copy(raw_action, raw_action + policy_joints_.size(), previous_inference_.begin());
 
-    for (int i = 0; i < 29; i++) {
+    for (size_t i = 0; i < policy_joints_.size(); i++) {
         std_msgs::msg::Float64 msg;
         msg.data = action[i];
         joint_publishers_[i]->publish(msg);
