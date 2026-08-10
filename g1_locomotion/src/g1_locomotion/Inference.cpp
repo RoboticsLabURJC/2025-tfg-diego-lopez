@@ -15,6 +15,7 @@ using std::placeholders::_1;
 Inference::Inference() : Node("inference")
 {
     previous_inference_.assign(policy_joints_.size(),0.f);
+    joint_publishers_.resize(policy_joints_.size());
 
     twist_sub_ = create_subscription<geometry_msgs::msg::Twist>(
         "/cmd_vel", 10, std::bind(&Inference::twist_callback, this, _1));

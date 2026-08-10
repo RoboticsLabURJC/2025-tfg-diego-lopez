@@ -46,7 +46,7 @@ private:
     rclcpp::Subscription<sensor_msgs::msg::JointState>::SharedPtr joint_state_sub_;
     rclcpp::Subscription<nav_msgs::msg::Odometry>::SharedPtr odometry_sub_;
 
-    std::array<rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr, 29> joint_publishers_;
+    std::vector<rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr> joint_publishers_;
 
     rclcpp::TimerBase::SharedPtr timer_;
 
