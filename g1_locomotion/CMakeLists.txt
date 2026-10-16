@@ -29,6 +29,8 @@ include_directories(include)
 add_library(${PROJECT_NAME} SHARED 
   src/g1_locomotion/Inference.cpp
   src/g1_locomotion/Random_movement.cpp
+  src/g1_locomotion/Navigation.cpp
+  src/g1_locomotion/Move_box.cpp
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
@@ -48,10 +50,20 @@ add_executable(random_movement_main src/random_movement_main.cpp)
 ament_target_dependencies(random_movement_main ${dependencies})
 target_link_libraries(random_movement_main ${PROJECT_NAME})
 
+add_executable(navigation_main src/navigation_main.cpp)
+ament_target_dependencies(navigation_main ${dependencies})
+target_link_libraries(navigation_main ${PROJECT_NAME})
+
+add_executable(move_box_main src/move_box_main.cpp)
+ament_target_dependencies(move_box_main ${dependencies})
+target_link_libraries(move_box_main ${PROJECT_NAME})
+
 install(TARGETS
     ${PROJECT_NAME}
     g1_locomotion_main
     random_movement_main
+    navigation_main
+    move_box_main
     ARCHIVE DESTINATION lib
     LIBRARY DESTINATION lib
     RUNTIME DESTINATION lib/${PROJECT_NAME}

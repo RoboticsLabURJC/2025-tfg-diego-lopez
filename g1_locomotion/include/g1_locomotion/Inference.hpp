@@ -14,6 +14,9 @@
 
 #include <onnxruntime_cxx_api.h>
 
+// elbows
+#include <random>
+
 
 namespace g1_locomotion
 {
@@ -24,7 +27,7 @@ public:
     Inference();
 
 private:
-    std::string model = "/policies/walk_free_elbows.onnx";
+    const std::string model = "/policies/walk_box_pos_v2.onnx";
 
     void twist_callback(const geometry_msgs::msg::Twist::ConstSharedPtr twist);
     void imu_callback(const sensor_msgs::msg::Imu::ConstSharedPtr imu);
@@ -36,8 +39,10 @@ private:
     std::array<float, 3> imu_lin_{};
     std::array<float, 3> imu_ang_{};
     std::array<float, 3> gravity_{};
-    std::array<float, 29> pos_{};
-    std::array<float, 29> vel_{};
+    // std::array<float, 29> pos_{};
+    // std::array<float, 29> vel_{};
+    std::vector<float> pos_{};
+    std::vector<float> vel_{};
     std::vector<float> previous_inference_{};
     std::array<float, 3> cmd_vel_{};
 
@@ -101,14 +106,16 @@ private:
         {"left_shoulder_pitch_joint", 0.43857732},
         {"left_shoulder_roll_joint", 0.43857732},
         {"left_shoulder_yaw_joint", 0.43857732},
-        {"left_wrist_roll_joint", 0.43857732},
-        {"left_wrist_pitch_joint", 0.07450087},
+        {"left_elbow_joint", 0.43857732},
+        {"left_wrist_roll_joint", 0.7450087},
+        {"left_wrist_pitch_joint", 0.7450087},
         {"left_wrist_yaw_joint", 0.07450087},
         {"right_shoulder_pitch_joint", 0.43857732},
         {"right_shoulder_roll_joint", 0.43857732},
         {"right_shoulder_yaw_joint", 0.43857732},
-        {"right_wrist_roll_joint", 0.43857732},
-        {"right_wrist_pitch_joint", 0.07450087},
+        {"right_elbow_joint", 0.43857732},
+        {"right_wrist_roll_joint", 0.7450087},
+        {"right_wrist_pitch_joint", 0.7450087},
         {"right_wrist_yaw_joint", 0.07450087}
     };
 
@@ -192,18 +199,20 @@ private:
         "waist_yaw_joint",
         "waist_roll_joint",
         "waist_pitch_joint",
-        "left_shoulder_pitch_joint",
-        "left_shoulder_roll_joint",
-        "left_shoulder_yaw_joint",
-        "left_wrist_roll_joint",
-        "left_wrist_pitch_joint",
-        "left_wrist_yaw_joint",
-        "right_shoulder_pitch_joint",
-        "right_shoulder_roll_joint",
-        "right_shoulder_yaw_joint",
-        "right_wrist_roll_joint",
-        "right_wrist_pitch_joint",
-        "right_wrist_yaw_joint",
+        // "left_shoulder_pitch_joint",
+        // "left_shoulder_roll_joint",
+        // "left_shoulder_yaw_joint",
+        // "left_elbow_joint",
+        // "left_wrist_roll_joint",
+        // "left_wrist_pitch_joint",
+        // "left_wrist_yaw_joint",
+        // "right_shoulder_pitch_joint",
+        // "right_shoulder_roll_joint",
+        // "right_shoulder_yaw_joint",
+        // "right_elbow_joint",
+        // "right_wrist_roll_joint",
+        // "right_wrist_pitch_joint",
+        // "right_wrist_yaw_joint",
     };
 
     Ort::Env env_{ORT_LOGGING_LEVEL_WARNING, "g1"};
