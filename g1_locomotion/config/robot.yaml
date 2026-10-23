@@ -1,0 +1,65 @@
+robot:
+  default_policy: walk
+  sensor_timeout_ms: 200
+
+  default_positions:
+    left_hip_pitch_joint:       -0.312
+    left_hip_roll_joint:        0.0
+    left_hip_yaw_joint:         0.0
+    left_knee_joint:            0.669
+    left_ankle_pitch_joint:    -0.363
+    left_ankle_roll_joint:      0.0
+    right_hip_pitch_joint:     -0.312
+    right_hip_roll_joint:       0.0
+    right_hip_yaw_joint:        0.0
+    right_knee_joint:           0.669
+    right_ankle_pitch_joint:   -0.363
+    right_ankle_roll_joint:     0.0
+    waist_yaw_joint:            0.0
+    waist_roll_joint:           0.0
+    waist_pitch_joint:          0.0
+    left_shoulder_pitch_joint:  0.2
+    left_shoulder_roll_joint:   0.2
+    left_shoulder_yaw_joint:    0.0
+    left_elbow_joint:           0.6
+    left_wrist_roll_joint:      0.0
+    left_wrist_pitch_joint:     0.0
+    left_wrist_yaw_joint:       0.0
+    right_shoulder_pitch_joint: 0.2
+    right_shoulder_roll_joint: -0.2
+    right_shoulder_yaw_joint:   0.0
+    right_elbow_joint:          0.6
+    right_wrist_roll_joint:     0.0
+    right_wrist_pitch_joint:    0.0
+    right_wrist_yaw_joint:      0.0
+
+  action_scales:
+    left_hip_pitch_joint:       0.54754645
+    left_hip_roll_joint:        0.35066146
+    left_hip_yaw_joint:         0.54754645
+    left_knee_joint:            0.35066146
+    left_ankle_pitch_joint:     0.43857732
+    left_ankle_roll_joint:      0.43857732
+    right_hip_pitch_joint:      0.54754645
+    right_hip_roll_joint:       0.35066146
+    right_hip_yaw_joint:        0.54754645
+    right_knee_joint:           0.35066146
+    right_ankle_pitch_joint:    0.43857732
+    right_ankle_roll_joint:     0.43857732
+    waist_yaw_joint:            0.54754645
+    waist_roll_joint:           0.43857732
+    waist_pitch_joint:          0.43857732
+    left_shoulder_pitch_joint:  0.43857732
+    left_shoulder_roll_joint:   0.43857732
+    left_shoulder_yaw_joint:    0.43857732
+    left_elbow_joint:           0.43857732
+    left_wrist_roll_joint:      0.43857732
+    left_wrist_pitch_joint:     0.07450087
+    left_wrist_yaw_joint:       0.07450087
+    right_shoulder_pitch_joint: 0.43857732
+    right_shoulder_roll_joint:  0.43857732
+    right_shoulder_yaw_joint:   0.43857732
+    right_elbow_joint:          0.43857732
+    right_wrist_roll_joint:     0.43857732
+    right_wrist_pitch_joint:    0.07450087
+    right_wrist_yaw_joint:      0.07450087

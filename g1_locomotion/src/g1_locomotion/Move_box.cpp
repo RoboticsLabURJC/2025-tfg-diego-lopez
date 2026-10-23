@@ -111,7 +111,6 @@ void Move_box::navigate(
     constexpr float GOAL_TOLERANCE = 0.04f;
     constexpr float ANGULAR_TOLERANCE = 0.04f;
 
-    constexpr float MAX_SPEED = 0.25f;
     constexpr float MAX_ANGULAR_SPEED = 0.6f;
 
     constexpr float K_LINEAR = 0.5f;

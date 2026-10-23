@@ -1,0 +1,32 @@
+name: walk_with_box
+model: policies/walk_box_pos_v2.onnx
+
+frequency_hz: 60.0
+input_name: obs
+output_name: actions
+
+controlled_joints:
+  - left_hip_pitch_joint
+  - left_hip_roll_joint
+  - left_hip_yaw_joint
+  - left_knee_joint
+  - left_ankle_pitch_joint
+  - left_ankle_roll_joint
+  - right_hip_pitch_joint
+  - right_hip_roll_joint
+  - right_hip_yaw_joint
+  - right_knee_joint
+  - right_ankle_pitch_joint
+  - right_ankle_roll_joint
+  - waist_yaw_joint
+  - waist_roll_joint
+  - waist_pitch_joint
+
+observation_order:
+  - base_linear_velocity
+  - base_angular_velocity
+  - projected_gravity
+  - relative_joint_positions
+  - joint_velocities
+  - previous_actions
+  - velocity_command
