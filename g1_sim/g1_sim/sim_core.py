@@ -16,6 +16,7 @@ WORLD_ALIASES = {
 
 ROBOT_ALIASES = {
     'g1_free_roam': os.path.join(PKG, 'models', 'g1_29dof', 'model.sdf'),
+    'g1_training_pd': os.path.join(PKG, 'models', 'g1_29dof_training_pd', 'model.sdf'),
     'g1_demo_vel': os.path.join(PKG, 'models', 'g1_demo_cmd_vel', 'model.sdf'),
     'g1_demo_pos': os.path.join(PKG, 'models', 'g1_demo_cmd_pos', 'model.sdf'),
 }
@@ -55,6 +56,7 @@ def _resolve_bridge_config(bridge_config, robot_model):
     if robot_model in (
         ROBOT_ALIASES['g1_demo_pos'],
         ROBOT_ALIASES['g1_free_roam'],
+        ROBOT_ALIASES['g1_training_pd'],
     ):
         return BRIDGE_ALIASES['g1_pos']
 
@@ -62,7 +64,7 @@ def _resolve_bridge_config(bridge_config, robot_model):
         return BRIDGE_ALIASES['g1_vel']
 
     raise ValueError(
-        'bridge_config:=auto only supports robot_model:=g1_free_roam, robot_model:=g1_demo_vel or robot_model:=g1_demo_pos. Set bridge_config explicitly for custom models.'
+        'bridge_config:=auto only supports robot_model:=g1_free_roam, robot_model:=g1_training_pd, robot_model:=g1_demo_vel or robot_model:=g1_demo_pos. Set bridge_config explicitly for custom models.'
     )
 
 
